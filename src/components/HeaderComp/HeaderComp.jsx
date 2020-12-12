@@ -1,14 +1,26 @@
+import React, { useState } from "react";
 import Logo from "../../assets/logo.png";
 import "./Header.css";
 
 function HeaderComp(props) {
+
+	const [menuClass, setMenuClass] = useState('header-main-link')
+
+	function showSubMenu() {
+		setMenuClass('header-main-link menu-opened');
+	}
+
+	function hideSubMenu() {
+		setMenuClass('header-main-link menu-closed');
+	}
+
 	return (
 		<header className="header">
 			<div className="d-flex align-items-center">
 				<div className="logo">
 					<img src={Logo} alt="logo" />
 				</div>
-				<div className="header-main-link">
+				<div className={menuClass} onMouseEnter={showSubMenu} onMouseLeave={hideSubMenu}>
 					<a href="./" className="main-item">Аниме</a>
 					<SubMenu propsData={props} />
 				</div>

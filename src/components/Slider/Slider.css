@@ -1,0 +1,64 @@
+.slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.slider__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slider__item {
+  position: absolute;
+  float: left;
+  width: 100%;
+  height: 100%;
+  border: 1px solid red;
+  text-align: center;
+  line-height: 500px;
+}
+
+.slider__item-0 {
+  left: -100%;
+}
+
+.slider__item-2 {
+  left: 100%;
+}
+
+
+.slider__container.left-direction {
+  transition: transform .7s;
+  transform: translateX(100%);
+}
+
+.slider__container.right-direction {
+  transition: transform .7s;
+  transform: translateX(-100%);
+}
+
+
+
+/* ============
+  slider buttons
+============ */
+.slider__button {
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 9;
+}
+
+.slider__button.to-left {
+  left: 0;
+}
+
+.slider__button.to-right {
+  right: 0;
+}

@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Slider.css'
+
 
 function Slider() {
   const [direction, setDirection] = useState('');
-  const [images, setImages] = useState([9, 0, 1]);
-  const sliderImages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [images, setImages] = useState(['', '', '']);
+  const [sliderImages, setSliderImages] = useState([]);
+
+  useEffect(() => {
+    fetch('https://swapi.dev/api/people/1')
+      .then(response => response.json())
+      .then(request => {
+        let sliderImagesLinks = request.films;
+
+        setSliderImages(sliderImagesLinks)
+        setImages([sliderImagesLinks[sliderImagesLinks.length - 1], sliderImagesLinks[0], sliderImagesLinks[1]])
+      });
+  }, [])
+
 
   let letChangeDirection = true;
 
@@ -36,7 +49,7 @@ function Slider() {
 
 
   function getCurrentSlide(choosedDirection) {
-    let currentSlide = images[1];
+    let currentSlide = sliderImages.indexOf(images[1]);
     let prevSlide;
     let nextSlide;
 

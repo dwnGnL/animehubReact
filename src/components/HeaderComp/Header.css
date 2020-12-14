@@ -143,6 +143,7 @@
 
 .menu-closed .sub-menu {
     animation: hideSubMenu .2s linear forwards;
+    pointer-events: none;
 }
 
 @keyframes showSubMenu {

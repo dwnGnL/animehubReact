@@ -53,14 +53,9 @@ function Slider() {
     let prevSlide;
     let nextSlide;
 
-    if (choosedDirection === 'right') {
-      currentSlide >= sliderImages.length - 1 ? currentSlide = 0 : currentSlide += 1;
-    }
-
-    if (choosedDirection === 'left') {
-      currentSlide <= 0 ? currentSlide = sliderImages.length - 1 : currentSlide -= 1;
-    }
-
+    if (choosedDirection === 'right') currentSlide >= sliderImages.length - 1 ? currentSlide = 0 : currentSlide += 1;
+    if (choosedDirection === 'left') currentSlide <= 0 ? currentSlide = sliderImages.length - 1 : currentSlide -= 1;
+    
     currentSlide <= 0 ? prevSlide = sliderImages.length - 1 : prevSlide = currentSlide - 1;
     currentSlide >= sliderImages.length - 1 ? nextSlide = 0 : nextSlide = currentSlide + 1;
 

@@ -11,10 +11,8 @@ function Slider() {
     fetch('https://swapi.dev/api/people/1')
       .then(response => response.json())
       .then(request => {
-        let sliderImagesLinks = request.films;
-
-        setSliderImages(sliderImagesLinks)
-        setImages([sliderImagesLinks[sliderImagesLinks.length - 1], sliderImagesLinks[0], sliderImagesLinks[1]])
+        setSliderImages(request.films)
+        setImages([request.films[request.films.length - 1], request.films[0], request.films[1]])
       });
   }, [])
 

@@ -21,42 +21,27 @@ function Slider() {
   }, [])
 
 
-  function toLeftSlide() {
+  function moveSlide(direction) {
     if (!changeDirection) return;
     setChangeDirection(false);
 
-    setDirection('left-direction');
-    moveBackgroundSlider('left');
+    setDirection(direction);
+    moveBackgroundSlider(direction);
 
     setTimeout(() => {
       setChangeDirection(true)
-      getCurrentSlide('left');
+      getCurrentSlide(direction);
       setDirection('');
     }, delay);
   }
-
-  function toRightSlide() {
-    if (!changeDirection) return;
-    setChangeDirection(false);
-
-    setDirection('right-direction');
-    moveBackgroundSlider('right');
-
-    setTimeout(() => {
-      setChangeDirection(true)
-      getCurrentSlide('right');
-      setDirection('');
-    }, delay);
-  }
-
 
   function getCurrentSlide(choosedDirection) {
     let currentSlide = sliderImages.indexOf(images[1]);
     let prevSlide;
     let nextSlide;
 
-    if (choosedDirection === 'right') currentSlide >= sliderImages.length - 1 ? currentSlide = 0 : currentSlide += 1;
-    if (choosedDirection === 'left') currentSlide <= 0 ? currentSlide = sliderImages.length - 1 : currentSlide -= 1;
+    if (choosedDirection === 'right-direction') currentSlide >= sliderImages.length - 1 ? currentSlide = 0 : currentSlide += 1;
+    if (choosedDirection === 'left-direction') currentSlide <= 0 ? currentSlide = sliderImages.length - 1 : currentSlide -= 1;
 
     currentSlide <= 0 ? prevSlide = sliderImages.length - 1 : prevSlide = currentSlide - 1;
     currentSlide >= sliderImages.length - 1 ? nextSlide = 0 : nextSlide = currentSlide + 1;
@@ -67,7 +52,7 @@ function Slider() {
   function moveBackgroundSlider(choosedDirection) {
     let movingPart = sliderBackgroundPart;
 
-    if (choosedDirection === 'right') {
+    if (choosedDirection === 'right-direction') {
       movingPart++;
 
       if (movingPart >= 3) {
@@ -79,7 +64,7 @@ function Slider() {
       }
     }
 
-    if (choosedDirection === 'left') {
+    if (choosedDirection === 'left-direction') {
       movingPart--;
 
       if (movingPart <= -3) {
@@ -94,12 +79,12 @@ function Slider() {
     setSliderBackgroundClass(`part_${movingPart} animated`)
     setSliderBackgroundPart(movingPart)
   }
-  
+
 
   return (
     <div className="slider">
-      <div className="slider__button to-left" onClick={toLeftSlide}>left</div>
-      <div className="slider__button to-right" onClick={toRightSlide}>right</div>
+      <div className="slider__button to-left" onClick={() => moveSlide('left-direction')}>left</div>
+      <div className="slider__button to-right" onClick={() => moveSlide('right-direction')}>right</div>
 
       <div className={`slider__background ${direction} ${sliderBackgroundClass}`}></div>
 

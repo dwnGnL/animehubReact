@@ -3,7 +3,6 @@ import Logo from "../../assets/logo.png";
 import "./Header.css";
 
 function HeaderComp(props) {
-
 	const [menuClass, setMenuClass] = useState('header-main-link')
 
 	function showSubMenu() {
@@ -104,6 +103,5 @@ function ListNavRight(props) {
 		</div>
 	)
 }
-
 
 export default HeaderComp;

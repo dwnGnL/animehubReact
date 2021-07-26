@@ -2,23 +2,19 @@ import React, { useEffect, useState } from 'react';
 import './Slider.css'
 
 
-function Slider() {
+function Slider({ allImages }) {
   const delay = 700;
+  const autorotateDelay = 5000;
   const [direction, setDirection] = useState('');
-  const [images, setImages] = useState(['', '', '']);
-  const [sliderImages, setSliderImages] = useState([]);
+  const [images, setImages] = useState([allImages[allImages.length - 1], allImages[0], allImages[1]]);
   const [sliderBackgroundPart, setSliderBackgroundPart] = useState(0);
   const [sliderBackgroundClass, setSliderBackgroundClass] = useState('part_0');
   const [changeDirection, setChangeDirection] = useState(true);
 
   useEffect(() => {
-    fetch('https://swapi.dev/api/people/1')
-      .then(response => response.json())
-      .then(request => {
-        setSliderImages(request.films)
-        setImages([request.films[request.films.length - 1], request.films[0], request.films[1]])
-      });
-  }, [])
+    const interval = setInterval(() => moveSlide('right-direction'), autorotateDelay);
+    return () => clearInterval(interval)
+  }, [moveSlide])
 
 
   function moveSlide(direction) {
@@ -30,23 +26,23 @@ function Slider() {
 
     setTimeout(() => {
       setChangeDirection(true)
-      getCurrentSlide(direction);
+      showCurrentSlide(direction);
       setDirection('');
     }, delay);
   }
 
-  function getCurrentSlide(choosedDirection) {
-    let currentSlide = sliderImages.indexOf(images[1]);
+  function showCurrentSlide(choosedDirection) {
+    let currentSlide = allImages.indexOf(images[1]);
     let prevSlide;
     let nextSlide;
 
-    if (choosedDirection === 'right-direction') currentSlide >= sliderImages.length - 1 ? currentSlide = 0 : currentSlide += 1;
-    if (choosedDirection === 'left-direction') currentSlide <= 0 ? currentSlide = sliderImages.length - 1 : currentSlide -= 1;
+    if (choosedDirection === 'right-direction') currentSlide >= allImages.length - 1 ? currentSlide = 0 : currentSlide += 1;
+    if (choosedDirection === 'left-direction') currentSlide <= 0 ? currentSlide = allImages.length - 1 : currentSlide -= 1;
 
-    currentSlide <= 0 ? prevSlide = sliderImages.length - 1 : prevSlide = currentSlide - 1;
-    currentSlide >= sliderImages.length - 1 ? nextSlide = 0 : nextSlide = currentSlide + 1;
+    currentSlide <= 0 ? prevSlide = allImages.length - 1 : prevSlide = currentSlide - 1;
+    currentSlide >= allImages.length - 1 ? nextSlide = 0 : nextSlide = currentSlide + 1;
 
-    setImages([sliderImages[prevSlide], sliderImages[currentSlide], sliderImages[nextSlide]]);
+    setImages([allImages[prevSlide], allImages[currentSlide], allImages[nextSlide]]);
   }
 
   function moveBackgroundSlider(choosedDirection) {

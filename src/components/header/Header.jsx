@@ -51,8 +51,8 @@ function SubMenu(props) {
   return (
     <div className="sub-menu">
       <div className="d-flex">
-        <LeftSubMenu propsData={props.propsData} />
-        <RightSubMenu propsData={props.propsData} />
+        <LeftSubMenu />
+        <RightSubMenu />
       </div>
     </div>
   );
@@ -93,7 +93,7 @@ function LeftSubMenu(props) {
   );
 }
 
-function RightSubMenu(props) {
+function RightSubMenu() {
 	const leftListGenre = [
     "детектив",
     "жестокие сцены",

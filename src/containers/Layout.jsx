@@ -1,11 +1,11 @@
-import React from "react";
-import Header from "../Header/Header";
-import Slider from '../../components/Slider/Slider'
+import React, { useState, useEffect } from "react";
+import Slider from "../components/slider/Slider";
+import Header from "../components/header/Header";
 
 function Layout(props) {
-    const [images, setImages] = React.useState([]);
+    const [images, setImages] = useState([]);
     
-    React.useEffect(() => {
+    useEffect(() => {
         fetch('https://swapi.dev/api/people/1')
         .then(response => response.json())
         .then(request => {

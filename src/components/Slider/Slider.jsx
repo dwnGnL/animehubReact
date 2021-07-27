@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Slider.css'
+import './slider.css'
 
 
 function Slider({ allImages }) {

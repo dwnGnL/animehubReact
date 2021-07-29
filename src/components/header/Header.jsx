@@ -24,30 +24,38 @@ function Header(props) {
 
   const [menuClass, setMenuClass] = useState("header-main-link");
 
-  function showSubMenu() {
-    setMenuClass("header-main-link menu-opened");
-  }
-
-  function hideSubMenu() {
-    setMenuClass("header-main-link menu-closed");
-  }
-
   return (
     <header className="header">
       <div className="d-flex align-items-center">
-        <div className="logo"><img src={Logo} alt="logo" /></div>
-        <div className={menuClass} onMouseEnter={showSubMenu} onMouseLeave={hideSubMenu} >
-          <a href="./" className="main-item">Аниме</a>
-          <SubMenu propsData={props} />
+        <div className="logo">
+          <img src={Logo} alt="logo" />
         </div>
-        <nav className="menu">{navLinks.map(item => <a href="./" key={item.id} className="menu-item">{item.title}</a>)}</nav>
+        <div
+          className={menuClass}
+          onMouseEnter={() => setMenuClass("header-main-link menu-opened")}
+          onMouseLeave={() => setMenuClass("header-main-link menu-closed")}
+        >
+          <a href="./" className="main-item">
+            Аниме
+          </a>
+          <SubMenu />
+        </div>
+        <nav className="menu">
+          {navLinks.map((item) => (
+            <a href="./" key={item.id} className="menu-item">
+              {item.title}
+            </a>
+          ))}
+        </nav>
       </div>
-      <div><button className="header-btn">Войти</button></div>
+      <div>
+        <button className="header-btn">Войти</button>
+      </div>
     </header>
   );
 }
 
-function SubMenu(props) {
+function SubMenu() {
   return (
     <div className="sub-menu">
       <div className="d-flex">
@@ -58,7 +66,7 @@ function SubMenu(props) {
   );
 }
 
-function LeftSubMenu(props) {
+function LeftSubMenu() {
   const listTypes = [
     {
       title: "ТВ",
@@ -82,7 +90,7 @@ function LeftSubMenu(props) {
     2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009,
     2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997,
     1996, 1995, 1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985,
-    1984
+    1984,
   ];
 
   return (
@@ -94,7 +102,7 @@ function LeftSubMenu(props) {
 }
 
 function RightSubMenu() {
-	const leftListGenre = [
+  const listGenre = [
     "детектив",
     "жестокие сцены",
     "комедия",
@@ -114,9 +122,6 @@ function RightSubMenu() {
     "махо-сёдзё",
     "меха",
     "мистерия",
-  ];
-
-	const rightListGenre = [
     "мистика",
     "музыкальный",
     "Онгоинг",
@@ -138,10 +143,21 @@ function RightSubMenu() {
     "этти",
   ];
 
+  const separateListGenre = [];
+  separateListGenre.push(listGenre.slice(0, listGenre.length / 2));
+  separateListGenre.push(listGenre.slice(listGenre.length / 2, listGenre.length));
+
   return (
     <div className="right">
-      <RightSubMenuList list={leftListGenre} />
-      <RightSubMenuList list={rightListGenre} />
+      {separateListGenre.map((genre, index) => {
+        return (
+          <div className="list" key={'submenu-' + index} >
+            <nav className="list-nav">
+              <RightSubMenuLinks list={genre} />
+            </nav>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -176,16 +192,14 @@ function YearList(props) {
   );
 }
 
-function RightSubMenuList(props) {
+function RightSubMenuLinks(props) {
   return (
-    <div className="list">
-      <nav className="list-nav">
-        {props.list.map((item, index) => (
-          <a href="./" key={index} className="list-nav-item">
-            {item}
-          </a>
-        ))}
-      </nav>
+    <div className="link">
+      {props.list.map((item, index) => (
+        <a href="./" key={index} className="list-nav-item">
+          {item}
+        </a>
+      ))}
     </div>
   );
 }

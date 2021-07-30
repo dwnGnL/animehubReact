@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Logo from "../../assets/logo.png";
+import AnimehubLogo from "../common/Logo";
+import Button from "../common/Button";
 import "./header.css";
 
 function Header(props) {
@@ -24,17 +25,18 @@ function Header(props) {
 
   const [menuClass, setMenuClass] = useState("header-main-link");
 
+  function subMenuHandle(isClosed) {
+    let menuClasses = 'header-main-link';
+    isClosed ? menuClasses += ' menu-opened' : menuClasses += ' menu-closed';
+    setMenuClass(menuClasses);
+  }
+
   return (
     <header className="header">
       <div className="d-flex align-items-center">
-        <div className="logo">
-          <img src={Logo} alt="logo" />
-        </div>
-        <div
-          className={menuClass}
-          onMouseEnter={() => setMenuClass("header-main-link menu-opened")}
-          onMouseLeave={() => setMenuClass("header-main-link menu-closed")}
-        >
+        <AnimehubLogo />
+
+        <div className={menuClass}onMouseEnter={() => subMenuHandle(true)} onMouseLeave={() => subMenuHandle(false)}>
           <a href="./" className="main-item">
             Аниме
           </a>
@@ -48,9 +50,8 @@ function Header(props) {
           ))}
         </nav>
       </div>
-      <div>
-        <button className="header-btn">Войти</button>
-      </div>
+      
+      <Button componentClassName="header-btn" title="Войти" />
     </header>
   );
 }

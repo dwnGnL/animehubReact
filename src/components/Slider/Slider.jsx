@@ -11,20 +11,18 @@ function Slider({ allImages }) {
   const [changeDirection, setChangeDirection] = useState(true);
 
   const showCurrentSlide = useCallback((choosedDirection) => {
-      let currentSlide = allImages.indexOf(images[1]);
-      let prevSlide;
-      let nextSlide;
+    let currentSlide = allImages.indexOf(images[1]);
+    let prevSlide;
+    let nextSlide;
 
-      if (choosedDirection === "right-direction") currentSlide >= allImages.length - 1 ? (currentSlide = 0) : (currentSlide += 1);
-      if (choosedDirection === "left-direction") currentSlide <= 0 ? (currentSlide = allImages.length - 1) : (currentSlide -= 1);
+    if (choosedDirection === "right-direction") currentSlide >= allImages.length - 1 ? (currentSlide = 0) : (currentSlide += 1);
+    if (choosedDirection === "left-direction") currentSlide <= 0 ? (currentSlide = allImages.length - 1) : (currentSlide -= 1);
 
-      currentSlide <= 0 ? (prevSlide = allImages.length - 1) : (prevSlide = currentSlide - 1);
-      currentSlide >= allImages.length - 1 ? (nextSlide = 0) : (nextSlide = currentSlide + 1);
+    currentSlide <= 0 ? (prevSlide = allImages.length - 1) : (prevSlide = currentSlide - 1);
+    currentSlide >= allImages.length - 1 ? (nextSlide = 0) : (nextSlide = currentSlide + 1);
 
-      setImages([allImages[prevSlide], allImages[currentSlide], allImages[nextSlide]]);
-    }, [allImages, images]
-  );
-
+    setImages([allImages[prevSlide], allImages[currentSlide], allImages[nextSlide]]);
+  }, [allImages, images]);
 
   const moveBackgroundSlider = useCallback((choosedDirection) => {
     let movingPart = sliderBackgroundPart;

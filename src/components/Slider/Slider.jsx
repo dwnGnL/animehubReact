@@ -28,35 +28,20 @@ function Slider({ allImages }) {
 
   const moveBackgroundSlider = useCallback((choosedDirection) => {
     let movingPart = sliderBackgroundPart;
+    
+    choosedDirection === "right-direction" ? movingPart++ : movingPart--;
 
-    if (choosedDirection === "right-direction") {
-      movingPart++;
-
-      if (movingPart >= 3) {
-        setTimeout(() => {
-          movingPart = 0;
-          setSliderBackgroundClass(`part_${0}`);
-          setSliderBackgroundPart(0);
-        }, delay);
-      }
-    }
-
-    if (choosedDirection === "left-direction") {
-      movingPart--;
-
-      if (movingPart <= -3) {
-        setTimeout(() => {
-          movingPart = 0;
-          setSliderBackgroundClass(`part_${0}`);
-          setSliderBackgroundPart(0);
-        }, delay);
-      }
+    if (movingPart >= 3 || movingPart <= -3) {
+      setTimeout(() => {
+        movingPart = 0;
+        setSliderBackgroundClass(`part_${0}`);
+        setSliderBackgroundPart(0);
+      }, delay);
     }
 
     setSliderBackgroundClass(`part_${movingPart} animated`);
     setSliderBackgroundPart(movingPart);
   }, [sliderBackgroundPart]);
-
 
   const moveSlide = useCallback((direction) => {
       if (!changeDirection) return;

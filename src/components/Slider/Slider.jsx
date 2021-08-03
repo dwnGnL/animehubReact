@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import "./slider.css";
 
 function Slider({ allImages }) {
@@ -64,8 +66,12 @@ function Slider({ allImages }) {
 
   return (
     <div className="slider">
-      <div className="slider__button to-left" onClick={() => moveSlide("left-direction")}>left</div>
-      <div className="slider__button to-right" onClick={() => moveSlide("right-direction")}>right</div>
+      <div className="slider__button to-left" onClick={() => moveSlide("left-direction")}>
+        <FontAwesomeIcon icon={faAngleDoubleLeft} />
+        </div>
+      <div className="slider__button to-right" onClick={() => moveSlide("right-direction")}>
+        <FontAwesomeIcon icon={faAngleDoubleRight} />
+      </div>
 
       <div className={`slider__background ${direction} ${sliderBackgroundClass}`}></div>
 

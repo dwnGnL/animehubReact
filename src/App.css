@@ -1,10 +1,31 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
+	margin: 0 auto;
+}
+
+
+/* ==============
+  media queries
+============== */
+@media screen and (min-width: 1200px) {
+	.wrapper {
+		width: 1200px;
+	}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+	.wrapper {
+		width: 992px;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.wrapper {
+		width: 100%;
+	}
 }

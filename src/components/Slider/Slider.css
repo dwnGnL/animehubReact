@@ -107,17 +107,41 @@
   slider buttons
 ============ */
 .slider__button {
+  display: flex;
   position: absolute;
   top: 50%;
+  width: 70px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #000;
   cursor: pointer;
   transform: translateY(-50%);
+  transition: all .15s;
   z-index: 9;
+  text-shadow: 0 0 5px #fff;
+  justify-content: center;
+  align-items: center;
 }
 
 .slider__button.to-left {
-  left: 0;
+  left: 10px;
 }
 
 .slider__button.to-right {
-  right: 0;
+  right: 10px;
+}
+
+.slider__button {
+  color: #6882A1;
+}
+
+.slider__button:hover {
+  color: #D81C27;
+}
+
+.slider__button:active {
+  color: #94A6BC;
+  box-shadow: 0 0 5px #000 inset;
 }

@@ -1,16 +1,27 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import "./slider.css";
 
 function Slider({ allImages }) {
-  const delay = 700;
-  const autorotateDelay = 5000;
+  const delay = useMemo(() => {
+    return {
+      animationDelay: 700,
+      autorotateDelay: 5000
+    }
+  }, []);
+
+  const slider = useRef();
+
+  // states
+  const [sliderHeight, setSliderHeight] = useState(0);
   const [direction, setDirection] = useState("");
   const [images, setImages] = useState([allImages[allImages.length - 1], allImages[0], allImages[1]]);
-  const [sliderBackgroundPart, setSliderBackgroundPart] = useState(0);
-  const [sliderBackgroundClass, setSliderBackgroundClass] = useState("part_0");
-  const [changeDirection, setChangeDirection] = useState(true);
+  const [backgroundPosition, setBackgroundPosition] = useState(0);
+  const [backgroundClass, setBackgroundClass] = useState("part_0");
+  const [allowSliding, setAllowSliding] = useState(true);
+
+  useEffect(() => setSliderHeight(slider.current.offsetWidth/ 2.4), []);
 
   const showCurrentSlide = useCallback((choosedDirection) => {
     let currentSlide = allImages.indexOf(images[1]);
@@ -27,53 +38,51 @@ function Slider({ allImages }) {
   }, [allImages, images]);
 
   const moveBackgroundSlider = useCallback((choosedDirection) => {
-    let movingPart = sliderBackgroundPart;
+    let movingPart = backgroundPosition;
     
     choosedDirection === "right-direction" ? movingPart++ : movingPart--;
 
     if (movingPart >= 3 || movingPart <= -3) {
       setTimeout(() => {
         movingPart = 0;
-        setSliderBackgroundClass(`part_${0}`);
-        setSliderBackgroundPart(0);
-      }, delay);
+        setBackgroundClass(`part_${0}`);
+        setBackgroundPosition(0);
+      }, delay.animationDelay);
     }
 
-    setSliderBackgroundClass(`part_${movingPart} animated`);
-    setSliderBackgroundPart(movingPart);
-  }, [sliderBackgroundPart]);
+    setBackgroundClass(`part_${movingPart} animated`);
+    setBackgroundPosition(movingPart);
+  }, [backgroundPosition, delay]);
 
   const moveSlide = useCallback((direction) => {
-      if (!changeDirection) return;
-      setChangeDirection(false);
+    if (!allowSliding) return;
+    setAllowSliding(false);
 
-      setDirection(direction);
-      moveBackgroundSlider(direction);
+    setDirection(direction);
+    moveBackgroundSlider(direction);
 
-      setTimeout(() => {
-        setChangeDirection(true);
-        showCurrentSlide(direction);
-        setDirection("");
-      }, delay);
-    },
-    [changeDirection, moveBackgroundSlider, showCurrentSlide]
-  );
+    setTimeout(() => {
+      setAllowSliding(true);
+      showCurrentSlide(direction);
+      setDirection("");
+    }, delay.animationDelay);
+  }, [allowSliding, moveBackgroundSlider, showCurrentSlide, delay]);
 
   useEffect(() => {
-    const interval = setInterval(() => moveSlide("right-direction"), autorotateDelay);
+    const interval = setInterval(() => moveSlide("right-direction"), delay.autorotateDelay);
     return () => clearInterval(interval);
-  }, [moveSlide]);
+  }, [moveSlide, delay]);
 
   return (
-    <div className="slider">
-      <div className="slider__button to-left" onClick={() => moveSlide("left-direction")}>
+    <div className="slider" ref={slider} style={{height: `${sliderHeight}px`}}>
+      <div className="slider__button to-left" style={{fontSize: `${sliderHeight/15}px`}} onClick={() => moveSlide("left-direction")}>
         <FontAwesomeIcon icon={faAngleDoubleLeft} />
         </div>
-      <div className="slider__button to-right" onClick={() => moveSlide("right-direction")}>
+      <div className="slider__button to-right" style={{fontSize: `${sliderHeight/15}px`}} onClick={() => moveSlide("right-direction")}>
         <FontAwesomeIcon icon={faAngleDoubleRight} />
       </div>
 
-      <div className={`slider__background ${direction} ${sliderBackgroundClass}`}></div>
+      <div className={`slider__background ${direction} ${backgroundClass}`}></div>
 
       <div className={`slider__container ${direction}`}>
         <div className="slider__item slider__item-0">{images[0]}</div>

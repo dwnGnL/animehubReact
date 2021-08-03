@@ -138,6 +138,7 @@
     display: block;
     color: inherit;
     text-decoration: none;
+    text-transform: capitalize;
     border-right: 1px solid #E3E3E3;
     padding: 2px 20px;
 }

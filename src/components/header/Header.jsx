@@ -3,7 +3,7 @@ import AnimehubLogo from "../common/Logo";
 import Button from "../common/Button";
 import "./header.css";
 
-function Header(props) {
+function Header() {
   const navLinks = [
     {
       title: "Дорамы",
@@ -33,21 +33,15 @@ function Header(props) {
 
   return (
     <header className="header">
-      <div className="d-flex align-items-center">
+      <div className="left_side">
         <AnimehubLogo />
 
-        <div className={menuClass}onMouseEnter={() => subMenuHandle(true)} onMouseLeave={() => subMenuHandle(false)}>
-          <a href="./" className="main-item">
-            Аниме
-          </a>
-          <SubMenu />
-        </div>
         <nav className="menu">
-          {navLinks.map((item) => (
-            <a href="./" key={item.id} className="menu-item">
-              {item.title}
-            </a>
-          ))}
+          <div className={menuClass}onMouseEnter={() => subMenuHandle(true)} onMouseLeave={() => subMenuHandle(false)}>
+            <a href="./" className="main-item">Аниме</a>
+            <SubMenu />
+          </div>
+          {navLinks.map((item) => <a href="./" key={item.id} className="menu-item">{item.title}</a>)}
         </nav>
       </div>
       
@@ -59,10 +53,8 @@ function Header(props) {
 function SubMenu() {
   return (
     <div className="sub-menu">
-      <div className="d-flex">
-        <LeftSubMenu />
-        <RightSubMenu />
-      </div>
+      <LeftSubMenu />
+      <RightSubMenu />
     </div>
   );
 }
@@ -152,11 +144,9 @@ function RightSubMenu() {
     <div className="right">
       {separateListGenre.map((genre, index) => {
         return (
-          <div className="list" key={'submenu-' + index} >
-            <nav className="list-nav">
-              <RightSubMenuLinks list={genre} />
-            </nav>
-          </div>
+          <nav className="list-nav" key={'submenu-' + index}>
+            <RightSubMenuLinks list={genre} />
+          </nav>
         );
       })}
     </div>
@@ -167,12 +157,8 @@ function TypeList(props) {
   return (
     <div>
       <span className="sub-menu-header">По типу</span>
-      <nav className="d-flex py-2 flex-wrap">
-        {props.list.map((item) => (
-          <a href="./" key={item.id} className="sub-menu-item">
-            {item.title}
-          </a>
-        ))}
+      <nav>
+        {props.list.map((item) => <a href="./" key={item.id} className="sub-menu-item">{item.title}</a>)}
       </nav>
     </div>
   );
@@ -182,12 +168,8 @@ function YearList(props) {
   return (
     <div>
       <span className="sub-menu-header">По годам</span>
-      <nav className="d-flex py-2 flex-wrap mr-1">
-        {props.list.map((item, index) => (
-          <a href="./" key={index} className="sub-menu-item">
-            {item}
-          </a>
-        ))}
+      <nav>
+        {props.list.map((item, index) => <a href="./" key={index} className="sub-menu-item">{item}</a>)}
       </nav>
     </div>
   );
@@ -196,11 +178,7 @@ function YearList(props) {
 function RightSubMenuLinks(props) {
   return (
     <div className="link">
-      {props.list.map((item, index) => (
-        <a href="./" key={index} className="list-nav-item">
-          {item}
-        </a>
-      ))}
+      {props.list.map((item, index) => <a href="./" key={index} className="list-nav-item">{item}</a>)}
     </div>
   );
 }

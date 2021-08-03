@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import "./slider.css";
 
+const delay = {
+  animationDelay: 700,
+  autorotateDelay: 5000
+};
+
 function Slider({ allImages }) {
-  const delay = useMemo(() => {
-    return {
-      animationDelay: 700,
-      autorotateDelay: 5000
-    }
-  }, []);
 
   const slider = useRef();
 
@@ -21,7 +20,7 @@ function Slider({ allImages }) {
   const [backgroundClass, setBackgroundClass] = useState("part_0");
   const [allowSliding, setAllowSliding] = useState(true);
 
-  useEffect(() => setSliderHeight(slider.current.offsetWidth/ 2.4), []);
+  useEffect(() => {setSliderHeight(slider.current.offsetWidth/ 2.4)}, []);
 
   const showCurrentSlide = useCallback((choosedDirection) => {
     let currentSlide = allImages.indexOf(images[1]);
@@ -52,7 +51,7 @@ function Slider({ allImages }) {
 
     setBackgroundClass(`part_${movingPart} animated`);
     setBackgroundPosition(movingPart);
-  }, [backgroundPosition, delay]);
+  }, [backgroundPosition]);
 
   const moveSlide = useCallback((direction) => {
     if (!allowSliding) return;
@@ -66,12 +65,12 @@ function Slider({ allImages }) {
       showCurrentSlide(direction);
       setDirection("");
     }, delay.animationDelay);
-  }, [allowSliding, moveBackgroundSlider, showCurrentSlide, delay]);
+  }, [allowSliding, moveBackgroundSlider, showCurrentSlide]);
 
   useEffect(() => {
     const interval = setInterval(() => moveSlide("right-direction"), delay.autorotateDelay);
     return () => clearInterval(interval);
-  }, [moveSlide, delay]);
+  }, [moveSlide]);
 
   return (
     <div className="slider" ref={slider} style={{height: `${sliderHeight}px`}}>

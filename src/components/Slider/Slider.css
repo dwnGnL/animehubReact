@@ -5,6 +5,11 @@
   overflow: hidden;
 }
 
+.slider.sliding .slider__background,
+.slider.sliding .slider__container {
+  transition: all .2s !important;
+}
+
 
 /* ==============
   slider background
@@ -19,43 +24,12 @@
   background-size: 33.3%;
 }
 
-.slider__background.part_0 {
-  transform: translateX(0);
+.slider__background.animated {
+  transition: all .7s;
 }
 
-.slider__background.part_0.animated {
-  transform: translateX(0);
-  transition: transform .7s;
-}
-
-.slider__background.part_1.animated {
-  transform: translateX(-11.1%);
-  transition: transform .7s;
-}
-
-.slider__background.part_2.animated {
-  transform: translateX(-22.2%);
-  transition: transform .7s;
-}
-
-.slider__background.part_3.animated {
-  transform: translateX(-33.3%);
-  transition: transform .7s;
-}
-
-.slider__background.part_-1.animated {
-  transform: translateX(11.1%);
-  transition: transform .7s;
-}
-
-.slider__background.part_-2.animated {
-  transform: translateX(22.2%);
-  transition: transform .7s;
-}
-
-.slider__background.part_-3.animated {
-  transform: translateX(33.3%);
-  transition: transform .7s;
+.sliding .slider__background {
+  transition: none !important;
 }
 
 
@@ -90,12 +64,12 @@
   slider directions
 ============== */
 .slider__container.left-direction {
-  transform: translateX(100%);
+  transform: translateX(100%) !important;
   transition: transform .7s;
 }
 
 .slider__container.right-direction {
-  transform: translateX(-100%);
+  transform: translateX(-100%) !important;
   transition: transform .7s;
 }
 

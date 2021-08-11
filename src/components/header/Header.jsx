@@ -1,9 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useContext, createContext } from "react";
 import AnimehubLogo from "../common/Logo";
 import Button from "../common/Button";
+import CloseBtn from "../common/CloseBtn";
 import "./header.css";
 
-function Header() {
+const HeaderContext = createContext();
+const MenuContext = createContext();
+
+function Header(props) {
+  const [menuOpened, setMenuOpened] = useState('');
+
+
+  function menuHandler(isOpened) {
+    isOpened ? setMenuOpened(' menu-opened') : setMenuOpened(' menu-closed');
+  }
+
+  return (
+    <HeaderContext.Provider value={menuHandler}>
+      <header className="header">
+        <div className="left_side">
+          <AnimehubLogo />
+          {props.device === 'desktop' ? <Menu activeMenuClass={menuOpened} device={props.device} /> : null}
+        </div>
+        
+        <div className="right_side">
+          <Button componentClassName="header-btn" title="Войти" />
+          {props.device === 'tablet' || props.device === 'mobile'  ? <MenuHumburger activeMenuClass={menuOpened} /> : null}
+        </div>
+      </header>
+      {props.device === 'tablet' || props.device === 'mobile'  ? <Menu activeMenuClass={menuOpened} device={props.device} /> : null}
+    </HeaderContext.Provider>
+  );
+}
+
+function MenuHumburger(props) {
+  const menuHandler = useContext(HeaderContext);
+
+  return (
+    <div className={'humburger_menu' + props.activeMenuClass} onClick={() => menuHandler(true)}>
+      <div className="menu_line menu_line-0"></div>
+      <div className="menu_line menu_line-1"></div>
+      <div className="menu_line menu_line-2"></div>
+    </div>
+  )
+}
+
+function Menu(props) {
+  const [activeMenuItemClass, setActiveMenuItemClass] = useState('');
+  const menuHandler = useContext(HeaderContext);
+
   const navLinks = [
     {
       title: "Дорамы",
@@ -23,36 +68,33 @@ function Header() {
     },
   ];
 
-  const [menuClass, setMenuClass] = useState("header-main-link");
-
-  function subMenuHandle(isClosed) {
-    let menuClasses = 'header-main-link';
-    isClosed ? menuClasses += ' menu-opened' : menuClasses += ' menu-closed';
-    setMenuClass(menuClasses);
+  function subMenuHandler(isOpened) {
+    isOpened  ? setActiveMenuItemClass(' sub-menu-opened') : setActiveMenuItemClass(' sub-menu-closed');
   }
 
   return (
-    <header className="header">
-      <div className="left_side">
-        <AnimehubLogo />
-
-        <nav className="menu">
-          <div className={menuClass}onMouseEnter={() => subMenuHandle(true)} onMouseLeave={() => subMenuHandle(false)}>
-            <a href="./" className="main-item">Аниме</a>
-            <SubMenu />
+    <MenuContext.Provider value={subMenuHandler}>
+      <div className={'menu-wrapper' + props.activeMenuClass + activeMenuItemClass} onClick={() => menuHandler(false)}>
+        <nav className='menu' onClick={(event) => event.stopPropagation()}>
+          <div className={'menu-item'} onMouseEnter={() => subMenuHandler(true)} onMouseLeave={() => props.device === 'desktop' ? subMenuHandler(false) : null}>
+            <div className="main-item">Аниме</div>
+            {props.device === 'desktop' ? <SubMenu device={props.device} /> : null}
           </div>
-          {navLinks.map((item) => <a href="./" key={item.id} className="menu-item">{item.title}</a>)}
+          {navLinks.map((item) => <div className={'menu-item'} onClick={() => menuHandler(false)} key={item.id}>{item.title}</div>)}
         </nav>
+
+        {props.device === 'mobile' || props.device === 'tablet' ? <SubMenu device={props.device} /> : null}
       </div>
-      
-      <Button componentClassName="header-btn" title="Войти" />
-    </header>
-  );
+    </MenuContext.Provider>
+  )
 }
 
-function SubMenu() {
+function SubMenu(props) {
+  const subMenuHandler = useContext(MenuContext);
+
   return (
-    <div className="sub-menu">
+    <div className="sub-menu" onClick={(event) => event.stopPropagation()}>
+      {props.device === 'mobile' || props.device === 'tablet' ? <CloseBtn closeFn={() => subMenuHandler(false)} width='8' color='#000' /> : null}
       <LeftSubMenu />
       <RightSubMenu />
     </div>
@@ -80,10 +122,10 @@ function LeftSubMenu() {
   ];
 
   const listYears = [
-    2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009,
-    2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997,
-    1996, 1995, 1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985,
-    1984,
+    2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010,
+    2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998,
+    1997, 1996, 1995, 1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986,
+    1985, 1984
   ];
 
   return (
@@ -133,7 +175,7 @@ function RightSubMenu() {
     "фантастика",
     "Фэнтези",
     "школа",
-    "этти",
+    "этти"
   ];
 
   const separateListGenre = [];

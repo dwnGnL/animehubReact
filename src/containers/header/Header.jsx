@@ -1,7 +1,7 @@
 import React, { useState, useContext, createContext } from "react";
-import AnimehubLogo from "../common/Logo";
-import Button from "../common/Button";
-import CloseBtn from "../common/CloseBtn";
+import AnimehubLogo from "../../components/common/Logo";
+import Button from "../../components/common/Button";
+import CloseBtn from "../../components/common/CloseBtn";
 import "./header.css";
 
 const HeaderContext = createContext();

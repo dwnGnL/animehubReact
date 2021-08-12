@@ -280,7 +280,7 @@ nav.menu {
 	}
 }
 
-@media screen and (min-width: 850px) and (max-width: 991px) {
+@media screen and (min-width: 850px) and (max-width: 1199px) {
 	.year_list nav {
 		grid-template-columns: repeat(5, 1fr);
 	}

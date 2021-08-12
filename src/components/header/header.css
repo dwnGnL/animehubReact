@@ -32,6 +32,7 @@
 .header-btn {
 	background-color: #6882A1;
 	color: #fff;
+	font-family: inherit;
 	border: none;
 	border-radius: 50px;
 	margin-right: 10px;
@@ -59,6 +60,7 @@ nav.menu {
 	display: flex;
 	position: relative;
 	color: inherit;
+	font-weight: 700;
 	text-decoration: none;
 	margin: 0px 10px;
 	padding: 0 20px;
@@ -100,9 +102,11 @@ nav.menu {
 	position: absolute;
 	top: 80px;
 	left: 0px;
+	width: 100%;
 	height: 0;
 	background: #fff;
 	color: #000;
+	font-weight: 400;
 	border-bottom: 1px solid rgba(0, 0, 0, .3);
 	box-shadow: 0 0 5px rgba(0, 0, 0, .3) inset;
 	opacity: 0;
@@ -123,9 +127,14 @@ nav.menu {
 	flex-wrap: wrap;
 }
 
+.year_list nav {
+	display: grid;
+}
+
 .sub-menu-header {
 	color: #696B6E;
 	font-size: 13px;
+	font-weight: 700;
 }
 
 .sub-menu-item {
@@ -161,7 +170,7 @@ nav.menu {
 	text-decoration: none;
 	text-transform: capitalize;
 	border-right: 1px solid #E3E3E3;
-	padding: 2px 20px;
+	padding: 5px 20px;
 }
 
 .list-nav-item:hover {
@@ -178,8 +187,6 @@ nav.menu {
 	pointer-events: none;
 	animation: hideSubMenu .2s linear forwards;
 }
-
-
 
 .humburger_menu {
 	position: relative;
@@ -267,17 +274,17 @@ nav.menu {
 /* ==============
   media queries
 ============== */
-/* @media screen and (min-width: 1200px) {
-	.wrapper {
-		width: 1200px;
+@media screen and (min-width: 1200px) {
+	.year_list nav {
+		grid-template-columns: repeat(7, 1fr);
 	}
 }
 
-@media screen and (min-width: 992px) and (max-width: 1200px) {
-	.wrapper {
-		width: 992px;
+@media screen and (min-width: 850px) and (max-width: 991px) {
+	.year_list nav {
+		grid-template-columns: repeat(5, 1fr);
 	}
-} */
+}
 
 @media screen and (max-width: 850px) {
 	.menu-wrapper {
@@ -385,6 +392,10 @@ nav.menu {
 
 	.list-nav-item {
 		padding: .5vw 2vw;
+	}
+
+	.year_list nav {
+		grid-template-columns: repeat(8, 1fr);
 	}
 
 	.close-btn {
@@ -502,6 +513,10 @@ nav.menu {
 		width: 100%;
 		font-size: 4vw;
 		padding: 0;
+	}
+
+	.year_list nav {
+		grid-template-columns: repeat(7, 1fr);
 	}
 
 	.close-btn {

@@ -197,7 +197,7 @@ function RightSubMenu() {
 
 function TypeList(props) {
   return (
-    <div>
+    <div className="type_list">
       <span className="sub-menu-header">По типу</span>
       <nav>
         {props.list.map((item) => <a href="./" key={item.id} className="sub-menu-item">{item.title}</a>)}
@@ -208,7 +208,7 @@ function TypeList(props) {
 
 function YearList(props) {
   return (
-    <div>
+    <div className="year_list">
       <span className="sub-menu-header">По годам</span>
       <nav>
         {props.list.map((item, index) => <a href="./" key={index} className="sub-menu-item">{item}</a>)}

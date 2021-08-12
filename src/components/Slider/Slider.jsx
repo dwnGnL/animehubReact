@@ -10,6 +10,7 @@ const delay = {
 
 function Slider({ allImages }) {
   const slider = useRef();
+  const bgPositionRef = useRef(0);
   const [sliderHeight, setSliderHeight] = useState(0);
   const [direction, setDirection] = useState('');
   const [images, setImages] = useState([allImages[allImages.length - 1], allImages[0], allImages[1]]);
@@ -114,11 +115,12 @@ function Slider({ allImages }) {
   }
 
   useEffect(() => {
+    setCurrentBgPosition(bgPositionRef.current);
     const interval = setInterval(() => moveSlide("right-direction"), delay.autorotateDelay);
     return () => clearInterval(interval);
   }, [moveSlide]);
 
-  useEffect(() => setCurrentBgPosition(transformBackground), [moveSlide]);
+  useEffect(() => {bgPositionRef.current = transformBackground}, [transformBackground]);
 
 
   return (

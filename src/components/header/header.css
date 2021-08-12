@@ -317,7 +317,7 @@ nav.menu {
 }
 
 
-@media screen and (min-width: 500px) and (max-width: 700px) {
+@media screen and (min-width: 569px) and (max-width: 700px) {
 	.header {
 		height: 70px;
 	}
@@ -333,7 +333,7 @@ nav.menu {
 	}
 }
 
-@media screen and (min-width: 500px) and (max-width: 850px) {
+@media screen and (min-width: 569px) and (max-width: 850px) {
 	nav.menu {
 		width: 30vw;
 		height: 100vh;
@@ -396,7 +396,7 @@ nav.menu {
 	}
 }
 
-@media screen and (max-width: 499px) {
+@media screen and (max-width: 568px) {
 
 	@keyframes showSubMenu {
 		0% {
@@ -430,6 +430,7 @@ nav.menu {
 			height: 0;
 		}
 	}
+
 	.header {
 		height: 50px;
 	}
@@ -459,7 +460,7 @@ nav.menu {
 	}
 
 	.menu-item {
-		font-size: 4vw;
+		font-size: 3.5vw;
 		margin: 0;
 		padding: 0;
 		justify-content: center;
@@ -473,6 +474,7 @@ nav.menu {
 	}
 
 	.menu-item:first-child {
+		font-size: 5vw;
 		grid-row: 1/3;
 	}
 

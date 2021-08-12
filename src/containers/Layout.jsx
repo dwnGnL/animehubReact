@@ -10,9 +10,9 @@ function Layout() {
   useEffect(() => {
     let wrapperWidth = wrapper.current.offsetWidth;
 
-    if (wrapperWidth <= 850 && wrapperWidth > 500) {
+    if (wrapperWidth <= 850 && wrapperWidth > 568) {
       setDevice('tablet');
-    } else if (wrapperWidth <= 500) {
+    } else if (wrapperWidth <= 568) {
       setDevice('mobile');
     } else {
       setDevice('desktop');

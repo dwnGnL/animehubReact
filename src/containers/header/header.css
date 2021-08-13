@@ -111,8 +111,18 @@ nav.menu {
 	box-shadow: 0 0 5px rgba(0, 0, 0, .3) inset;
 	opacity: 0;
 	cursor: default;
+	pointer-events: none;
 	z-index: 2;
 	overflow: hidden;
+}
+
+.sub-menu-opened .sub-menu {
+	pointer-events: all;
+	animation: showSubMenu .2s linear forwards;
+}
+
+.sub-menu-closed .sub-menu {
+	animation: hideSubMenu .2s linear forwards;
 }
 
 .left {
@@ -177,15 +187,6 @@ nav.menu {
 	background-color: #F8F8F8;
 	color: #D81C27;
 	text-decoration: none;
-}
-
-.sub-menu-opened .sub-menu {
-	animation: showSubMenu .2s linear forwards;
-}
-
-.sub-menu-closed .sub-menu {
-	pointer-events: none;
-	animation: hideSubMenu .2s linear forwards;
 }
 
 .humburger_menu {

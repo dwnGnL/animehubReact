@@ -46,7 +46,7 @@ function MenuHumburger(props) {
 }
 
 function Menu(props) {
-  const [activeMenuItemClass, setActiveMenuItemClass] = useState('');
+  const [activeMenuItemClass, setActiveMenuItemClass] = useState('sub-menu-closed');
   const menuHandler = useContext(HeaderContext);
 
   const navLinks = [

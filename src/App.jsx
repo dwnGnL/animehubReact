@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     let wrapperWidth = wrapper.current.offsetWidth;
 
-    if (wrapperWidth <= 850 && wrapperWidth > 568) {
+    if (wrapperWidth < 850 && wrapperWidth > 568) {
       setDevice('tablet');
     } else if (wrapperWidth <= 568) {
       setDevice('mobile');
@@ -24,7 +24,7 @@ function App() {
     <div className="wrapper" ref={wrapper} data-device={device}>
       <Header device={device} />
       <Content />
-      <Footer />
+      <Footer device={device} />
     </div>
   );
 }

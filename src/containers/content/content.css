@@ -1,0 +1,5 @@
+.content {
+  box-shadow: 0 0 30px #cacaca;
+  /* display: grid;
+  grid-template-columns: repeat(12, 1fr); */
+}

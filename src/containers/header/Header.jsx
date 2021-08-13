@@ -25,7 +25,7 @@ function Header(props) {
         
         <div className="right_side">
           <Button componentClassName="header-btn" title="Войти" />
-          {props.device === 'tablet' || props.device === 'mobile'  ? <MenuHumburger activeMenuClass={menuOpened} /> : null}
+          {props.device === 'tablet' || props.device === 'mobile'  ? <MenuHamburger activeMenuClass={menuOpened} /> : null}
         </div>
       </header>
       {props.device === 'tablet' || props.device === 'mobile'  ? <Menu activeMenuClass={menuOpened} device={props.device} /> : null}
@@ -33,11 +33,11 @@ function Header(props) {
   );
 }
 
-function MenuHumburger(props) {
+function MenuHamburger(props) {
   const menuHandler = useContext(HeaderContext);
 
   return (
-    <div className={'humburger_menu' + props.activeMenuClass} onClick={() => menuHandler(true)}>
+    <div className={'hamburger_menu' + props.activeMenuClass} onClick={() => menuHandler(true)}>
       <div className="menu_line menu_line-0"></div>
       <div className="menu_line menu_line-1"></div>
       <div className="menu_line menu_line-2"></div>

@@ -1,3 +1,6 @@
+/* ==============
+  header
+============== */
 .header {
 	display: flex;
 	position: relative;
@@ -43,6 +46,14 @@
 
 .header-btn:hover {
 	background-color: #889CB5;
+}
+
+
+/* ==============
+  navigation
+============== */
+.menu-wrapper {
+	user-select: none;
 }
 
 nav.menu {
@@ -97,6 +108,10 @@ nav.menu {
 	background-color: #D81C27;
 }
 
+
+/* ==============
+  sub menu
+============== */
 .sub-menu {
 	display: flex;
 	position: absolute;
@@ -125,6 +140,10 @@ nav.menu {
 	animation: hideSubMenu .2s linear forwards;
 }
 
+
+/* ==============
+  sub menu entries
+============== */
 .left {
 	width: 33.3%;
 	background: #F8F8F8;
@@ -189,7 +208,11 @@ nav.menu {
 	text-decoration: none;
 }
 
-.humburger_menu {
+
+/* ==============
+  hamburger
+============== */
+.hamburger_menu {
 	position: relative;
 	width: 80px;
 	height: 80px;
@@ -217,20 +240,16 @@ nav.menu {
 }
 
 
-.humburger_menu.menu-opened .menu_line-0 {
+.hamburger_menu.menu-opened .menu_line-0 {
 	transform: translateY(0) rotate(45deg);
 }
 
-.humburger_menu.menu-opened .menu_line-1 {
+.hamburger_menu.menu-opened .menu_line-1 {
 	opacity: 0;
 }
 
-.humburger_menu.menu-opened .menu_line-2 {
+.hamburger_menu.menu-opened .menu_line-2 {
 	transform: translateY(0) rotate(-45deg);
-}
-
-.menu-wrapper {
-	user-select: none;
 }
 
 
@@ -335,7 +354,7 @@ nav.menu {
 		height: 55px;
 	}
 
-	.humburger_menu {
+	.hamburger_menu {
 		width: 70px;
 		height: 70px;
 	}
@@ -456,7 +475,7 @@ nav.menu {
 		height: 40px;
 	}
 
-	.humburger_menu {
+	.hamburger_menu {
 		width: 50px;
 		height: 50px;
 	}

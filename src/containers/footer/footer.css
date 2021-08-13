@@ -1,0 +1,147 @@
+/* ==============
+  general
+============== */
+.footer {
+  padding: 30px 50px;
+}
+
+
+.left_footer_block {
+  display: flex;
+  align-items: center;
+}
+
+
+.top_block {
+  border-bottom: 1px solid #E3E3E3;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+
+/* ==============
+  question
+============== */
+.question {
+  font-weight: 700;
+}
+
+.question_title {
+  color: #888888;
+  font-size: 20px;
+}
+
+.question_link {
+  font-size: 14px;
+  line-height: 22px;
+  text-decoration: none;
+}
+
+
+/* ==============
+  question
+============== */
+.contact_us {
+  text-align: center;
+}
+
+.contact_us_link {
+  font-weight: 500;
+}
+
+
+/* ==============
+  social
+============== */
+.social_block {
+  text-align: center;
+}
+
+.social_title {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.social_network_list {
+  display: flex;
+  width: 115px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.social_link {
+  width: 30px;
+  height: 30px;
+  transition: fill .2s;
+  fill: #8FA3BA;
+}
+
+.social_link:hover {
+  fill: #CFCFCF;
+}
+
+
+/* ==============
+  media queries
+============== */
+@media screen and (min-width: 1200px) {
+  .top_block {
+    display: grid;
+    grid-template-columns: 4fr 2fr 2fr;
+    grid-gap: 20px;
+  }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1200px) {
+  .top_block {
+    display: grid;
+    grid-template-columns: 4fr 2fr 2fr;
+    grid-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 849px) {
+  .top_block {
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+  }
+
+  .left_footer_block {
+    justify-content: center;
+  }
+
+  .copyright_block {
+    text-align: center;
+  }
+}
+
+
+@media screen and (max-width: 568px) {
+  .question_title,
+  .contact_us_link,
+  .social_title,
+  .copyright_block {
+    font-size: 5vw;
+  }
+
+  .question_title,
+  .question_link {
+    margin-bottom: 2vw;
+  }
+
+  .question_link {
+    font-size: 4vw;
+    line-height: 1;
+  }
+
+  .social_network_list {
+    width: 35vw;
+  }
+
+  .social_link {
+    width: 9vw;
+    height: 9vw;
+  }
+}

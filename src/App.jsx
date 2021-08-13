@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import Header from "./containers/header/Header";
-import Content from "./containers/content/Content";
-import "./App.css";
+import React, { useState, useEffect, useRef } from 'react';
+import Header from './containers/header/Header';
+import Content from './containers/content/Content';
+import Footer from './containers/footer/Footer';
+import './App.css';
 
 function App() {
   const wrapper = useRef();
@@ -23,6 +24,7 @@ function App() {
     <div className="wrapper" ref={wrapper} data-device={device}>
       <Header device={device} />
       <Content />
+      <Footer />
     </div>
   );
 }

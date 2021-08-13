@@ -1,7 +1,7 @@
 import React, { useState, useContext, createContext } from "react";
-import AnimehubLogo from "../../components/common/Logo";
+import Logo from "../../components/common/Logo";
 import Button from "../../components/common/Button";
-import CloseBtn from "../../components/common/CloseBtn";
+import CloseBtn from "../../components/icons/CloseBtn";
 import "./header.css";
 
 const HeaderContext = createContext();
@@ -19,7 +19,7 @@ function Header(props) {
     <HeaderContext.Provider value={menuHandler}>
       <header className="header">
         <div className="left_side">
-          <AnimehubLogo />
+          <Logo />
           {props.device === 'desktop' ? <Menu activeMenuClass={menuOpened} device={props.device} /> : null}
         </div>
         
@@ -46,7 +46,7 @@ function MenuHumburger(props) {
 }
 
 function Menu(props) {
-  const [activeMenuItemClass, setActiveMenuItemClass] = useState('sub-menu-closed');
+  const [activeMenuItemClass, setActiveMenuItemClass] = useState('');
   const menuHandler = useContext(HeaderContext);
 
   const navLinks = [

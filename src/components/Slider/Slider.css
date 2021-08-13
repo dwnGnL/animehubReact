@@ -90,27 +90,26 @@
   transform: translateY(-50%);
   transition: all .15s;
   z-index: 9;
+  fill: #6882A1;
   justify-content: center;
   align-items: center;
 }
 
 .slider__button.to-left {
   left: 10px;
+  transform: rotate(180deg) translateY(50%);
 }
 
 .slider__button.to-right {
   right: 10px;
 }
 
-.slider__button {
-  color: #6882A1;
-}
 
 .slider__button:hover {
-  color: #D81C27;
+  fill: #D81C27;
 }
 
 .slider__button:active {
-  color: #94A6BC;
+  fill: #94A6BC;
   box-shadow: 0 0 5px #000 inset;
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
+import SLiderArrow from '../icons/SLiderArrow';
 import "./slider.css";
 
 const delay = {
@@ -125,11 +124,11 @@ function Slider({ allImages }) {
 
   return (
     <div className={`slider ${sliderClass}`} ref={slider} style={{height: `${sliderHeight}px`}}>
-      <div className="slider__button to-left" style={{fontSize: `${sliderHeight/15}px`}} onClick={() => moveSlide("left-direction")}>
-        <FontAwesomeIcon icon={faAngleDoubleLeft} />
-        </div>
-      <div className="slider__button to-right" style={{fontSize: `${sliderHeight/15}px`}} onClick={() => moveSlide("right-direction")}>
-        <FontAwesomeIcon icon={faAngleDoubleRight} />
+      <div className="slider__button to-left" onClick={() => moveSlide("left-direction")}>
+        <SLiderArrow />
+      </div>
+      <div className="slider__button to-right" onClick={() => moveSlide("right-direction")}>
+        <SLiderArrow />
       </div>
 
       <div className={`slider__background ${direction} ${backgroundClass}`} style={{transform: `translateX(${transformBackground}px)`}}></div>

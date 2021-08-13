@@ -3,9 +3,9 @@ import Main from '../../tabs/Main';
 
 function Content() {
   return (
-    <>
+    <div className="content">
       <Main />
-    </>
+    </div>
   );
 }
 

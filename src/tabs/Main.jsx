@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Slider from '../components/slider/Slider';
+import Input from '../components/common/input/Input';
 
 function Main() {
-  const [sliderImages, setSliderImages] = useState([]);
-
-  useEffect(() => {
-    fetch("https://swapi.dev/api/people/1")
-      .then((response) => response.json())
-      .then((request) => {
-        setSliderImages(request.films);
-      });
-  }, []);
-
   return (
     <>
-      {sliderImages.length !== 0 ? <Slider allImages={sliderImages} /> : null}
+      <Slider />
+      <Input name="search_film" placeholder="Поиск аниме" />
     </>
   );
 }

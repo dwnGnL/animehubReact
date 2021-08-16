@@ -1,6 +1,11 @@
+.slider_wrapper {
+  position: relative;
+}
+
 .slider {
   position: relative;
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -110,6 +115,6 @@
 }
 
 .slider__button:active {
-  fill: #94A6BC;
   box-shadow: 0 0 5px #000 inset;
+  fill: #94A6BC;
 }

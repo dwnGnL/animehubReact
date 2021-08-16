@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import SLiderArrow from '../icons/SLiderArrow';
+import Loader from "../common/loader/Loader";
 import "./slider.css";
 
 const delay = {
@@ -7,10 +8,40 @@ const delay = {
   autorotateDelay: 5000
 };
 
-function Slider({ allImages }) {
+const LoaderStyles = {
+  top: '50%',
+  left: '50%',
+  width: '50px',
+  height: '50px',
+  transform: 'translate(-50%, -50%)'
+}
+
+
+function Slider() {
+  const sliderWrapper = useRef();
+  const [sliderWrapperHeight, setSliderWrapperHeight] = useState();
+  const [sliderImages, setSliderImages] = useState([]);
+
+  useEffect(() => {
+    setSliderWrapperHeight(sliderWrapper.current.offsetWidth/ 2.4);
+
+    fetch("https://swapi.dev/api/people/1")
+      .then((response) => response.json())
+      .then((request) => {
+        setSliderImages(request.films);
+      });
+  }, []);
+
+  return (
+    <div className="slider_wrapper"  ref={sliderWrapper} style={{height: `${sliderWrapperHeight}px`}}>
+      {sliderImages.length !== 0 ? <SliderInner allImages={sliderImages} /> : <Loader width={50} height={50} styles={LoaderStyles} />}
+    </div>
+  );
+}
+
+function SliderInner({ allImages }) {
   const slider = useRef();
   const bgPositionRef = useRef(0);
-  const [sliderHeight, setSliderHeight] = useState(0);
   const [direction, setDirection] = useState('');
   const [images, setImages] = useState([allImages[allImages.length - 1], allImages[0], allImages[1]]);
   const [backgroundPosition, setBackgroundPosition] = useState(0);
@@ -25,9 +56,6 @@ function Slider({ allImages }) {
     end: 0
   });
 
-
-  useEffect(() => {setSliderHeight(slider.current.offsetWidth/ 2.4)}, []);
-
   const showCurrentSlide = useCallback((choosedDirection) => {
     let currentSlide = allImages.indexOf(images[1]);
     let prevSlide, nextSlide;
@@ -40,7 +68,6 @@ function Slider({ allImages }) {
 
     setImages([allImages[prevSlide], allImages[currentSlide], allImages[nextSlide]]);
   }, [allImages, images]);
-
 
   const moveBackgroundSlider = useCallback((choosedDirection) => {
     const width = slider.current.offsetWidth;
@@ -62,7 +89,6 @@ function Slider({ allImages }) {
     setTimeout(() => setBackgroundClass(''), delay.animationDelay);
   }, [backgroundPosition]);
 
-
   const moveSlide = useCallback((direction, obligatoryAllow = false) => {
     if (!allowSliding && !obligatoryAllow) return;
     setAllowSliding(false);
@@ -76,7 +102,6 @@ function Slider({ allImages }) {
       setDirection("");
     }, delay.animationDelay);
   }, [allowSliding, moveBackgroundSlider, showCurrentSlide]);
-
 
   function touchSliding(e) {
     let newCoordinates = e.changedTouches[0].clientX;
@@ -121,9 +146,8 @@ function Slider({ allImages }) {
 
   useEffect(() => {bgPositionRef.current = transformBackground}, [transformBackground]);
 
-
   return (
-    <div className={`slider ${sliderClass}`} ref={slider} style={{height: `${sliderHeight}px`}}>
+    <div className={`slider ${sliderClass}`} ref={slider}>
       <div className="slider__button to-left" onClick={() => moveSlide("left-direction")}>
         <SLiderArrow />
       </div>

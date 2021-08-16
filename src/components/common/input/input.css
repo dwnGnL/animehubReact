@@ -1,0 +1,34 @@
+form {
+  position: relative;
+  font-size: 17px;
+  color: #7F7F7F;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid #6882A1;
+  box-sizing: border-box;
+  transition: all .3s;
+  background: transparent;
+  color: inherit;
+  width: 100%;
+  outline: none;
+  font-size: inherit;
+}
+
+.focused input {
+  border-color: #D81C27;
+}
+
+div.placeholder {
+  color: inherit;
+  position: absolute;
+  top: 0;
+  transform-origin: left;
+  transition: all .3s;
+}
+
+.focused div.placeholder {
+  transform: translateY(-65%) scale(.75);
+  color: #D81C27;
+}

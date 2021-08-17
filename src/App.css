@@ -6,9 +6,17 @@
 
 .wrapper {
 	min-height: 100vh;
+	overflow: hidden;
 	margin: 0 auto;
 	box-shadow: 0 0 10px rgba(0, 0, 0, .3);
-	overflow: hidden;
+}
+
+.layout {
+	display: grid;
+  grid-template-columns: repeat(12, 1fr);
+	grid-gap: 20px;
+	padding: 20px;
+  box-shadow: 0 0 30px #cacaca;
 }
 
 a {

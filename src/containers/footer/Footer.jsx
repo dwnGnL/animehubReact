@@ -5,10 +5,10 @@ import './footer.css';
 
 function Footer(props) {
   return (
-    <div className="footer">
+    <footer className="footer">
       <Top device={props.device} />
       <Copyright />
-    </div>
+    </footer>
   );
 }
 

@@ -1,7 +1,7 @@
 /* ==============
   header
 ============== */
-.header {
+header {
 	display: flex;
 	position: relative;
 	height: 80px;

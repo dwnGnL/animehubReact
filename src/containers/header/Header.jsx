@@ -46,7 +46,7 @@ function MenuHamburger(props) {
       <div className="menu_line menu_line-1"></div>
       <div className="menu_line menu_line-2"></div>
     </div>
-  )
+  );
 }
 
 function Menu(props) {
@@ -69,7 +69,7 @@ function Menu(props) {
 
       {props.device === 'mobile' || props.device === 'tablet' ? <SubMenu device={props.device} /> : null}
     </div>
-  )
+  );
 }
 
 export default Header;

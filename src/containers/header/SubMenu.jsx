@@ -72,5 +72,4 @@ function RightSubMenuLinks(props) {
   );
 }
 
-
 export default SubMenu;

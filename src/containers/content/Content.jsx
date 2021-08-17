@@ -4,9 +4,9 @@ import './content.css';
 
 function Content() {
   return (
-    <div className="content">
+    <main>
       <Main />
-    </div>
+    </main>
   );
 }
 

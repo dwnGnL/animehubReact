@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './containers/header/Header';
 import Content from './containers/content/Content';
+import Sidebar from './containers/sidebar/Sidebar';
 import Footer from './containers/footer/Footer';
 import './App.css';
 
@@ -23,7 +24,10 @@ function App() {
   return (
     <div className="wrapper" ref={wrapper} data-device={device}>
       <Header device={device} />
-      <Content />
+      <div className="layout">
+        <Content />
+        <Sidebar />
+      </div>
       <Footer device={device} />
     </div>
   );

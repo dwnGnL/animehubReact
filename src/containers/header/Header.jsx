@@ -1,11 +1,10 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useContext } from "react";
+import { HeaderContext, MenuContext } from '../../Context';
 import Logo from "../../components/common/Logo";
 import Button from "../../components/common/Button";
-import CloseBtn from "../../components/icons/CloseBtn";
+import { CloseBtn } from "../../components/common/Icons";
 import "./header.css";
 
-const HeaderContext = createContext();
-const MenuContext = createContext();
 
 function Header(props) {
   const [menuOpened, setMenuOpened] = useState('');

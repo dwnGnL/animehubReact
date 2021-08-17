@@ -1,8 +1,6 @@
 import React from 'react';
 import Logo from '../../components/common/Logo';
-import Vk from '../../components/icons/Vk';
-import Facebook from '../../components/icons/Facebook';
-import Instagram from '../../components/icons/Instagram';
+import { Vk, Instagram, Facebook } from '../../components/common/Icons';
 import './footer.css';
 
 function Footer(props) {

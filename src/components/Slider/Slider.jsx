@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import SLiderArrow from '../icons/SLiderArrow';
+import { SLiderArrow } from '../common/Icons';
 import Loader from "../common/loader/Loader";
 import "./slider.css";
 

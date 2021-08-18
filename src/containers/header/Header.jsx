@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { HeaderContext } from '../../Context';
+import React, { useState, useContext, useEffect, useRef } from "react";
+import { HeaderContext, WrapperContext } from '../../Context';
 import SubMenu from './SubMenu';
 import Logo from "../../components/common/Logo";
 import Button from "../../components/common/Button";
@@ -8,8 +8,24 @@ import "./header.css";
 
 
 function Header(props) {
+  const wrapper = useContext(WrapperContext);
+  const header = useRef();
+  const [headerFixed, setHeaderFixed] = useState('');
   const [menuOpened, setMenuOpened] = useState('');
   const [subMenuOpened, setSubMenuOpened] = useState('');
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      const wrapperPositoin = wrapper.current.getBoundingClientRect().top;
+      const headerHeight = header.current.clientHeight;
+
+      if (wrapperPositoin <= -headerHeight) {
+        setHeaderFixed(' fixed');
+      } if (wrapperPositoin === 0) {
+        setHeaderFixed('');
+      }
+    })
+  }, [wrapper]);
 
   function menuHandler(isOpened) {
     isOpened ? setMenuOpened(' menu-opened') : setMenuOpened(' menu-closed');
@@ -21,7 +37,7 @@ function Header(props) {
 
   return (
     <HeaderContext.Provider value={{menuHandler: menuHandler, subMenuHandler: subMenuHandler}}>
-      <header className="header">
+      <header className={'header' + headerFixed} ref={header}>
         <div className="left_side">
           <Logo />
           {props.device === 'desktop' ? <Menu activeMenuClass={menuOpened} activeSubMenuClass={subMenuOpened} device={props.device} /> : null}

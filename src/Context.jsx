@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
 const HeaderContext = createContext();
-const MenuContext = createContext();
+const WrapperContext = createContext();
 
-export { HeaderContext, MenuContext };
+export { HeaderContext, WrapperContext };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { WrapperContext } from './Context';
 import Header from './containers/header/Header';
 import Content from './containers/content/Content';
 import Sidebar from './containers/sidebar/Sidebar';
@@ -22,14 +23,16 @@ function App() {
   }, [device]);
 
   return (
-    <div className="wrapper" ref={wrapper} data-device={device}>
-      <Header device={device} />
-      <div className="layout">
-        <Content />
-        <Sidebar />
+    <WrapperContext.Provider value={wrapper}>
+      <div className="wrapper" ref={wrapper} data-device={device}>
+        <Header device={device} />
+        <div className="layout">
+          <Content />
+          <Sidebar />
+        </div>
+        <Footer device={device} />
       </div>
-      <Footer device={device} />
-    </div>
+    </WrapperContext.Provider>
   );
 }
 

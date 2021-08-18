@@ -1,0 +1,216 @@
+aside {
+  grid-column: 10/13;
+}
+
+
+h1.headline {
+  font-size: 20px;
+}
+
+.sidebar_item {
+  margin-top: 3em;
+}
+
+
+/* ==============
+  Top anime
+============== */
+.top__anime_img {
+  width: 180px;
+  height: 250px;
+  background: radial-gradient(black, transparent);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 20px;
+}
+
+ul.top__anime_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li.top__anime_item {
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+li.top__anime_item:hover {
+  color: #D81C27;
+}
+
+li.top__anime_item-0 {
+  margin-top: 0;
+}
+
+li.top__anime_item a {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-gap: .5em;
+  text-decoration: none;
+}
+
+.list__number {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  background: #F8F8F8;
+  border-radius: 100%;
+}
+
+li.top__anime_item-0 .list__number {
+  background: #FCBC5B;
+}
+
+.anime__title {
+  display: -webkit-box;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+
+/* ==============
+  Questionnaire
+============== */
+.questionnaire_inner {
+  background: #F8F8F8;
+  padding: 10px;
+}
+
+.question__title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
+.question__votes {
+  font-size: 12px;
+  margin-bottom: 0.5em;
+}
+
+.checkbox__item {
+  position: relative;
+  height: 2.5em;
+  background: #E3E3E3;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: .5em;
+  cursor: pointer;
+}
+
+.text {
+  position: relative;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  font-size: 14px;
+  padding: .5em;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #C4C4C4;
+  transition: .5s;
+}
+
+
+/* ==============
+  Comments
+============== */
+.comment_item {
+  border-bottom: 1px solid #E3E3E3;
+  margin-bottom: .5em;
+  padding-bottom: .2em;
+}
+
+.user {
+  display: grid;
+  grid-template-columns: 25px auto 70px;
+  grid-gap: .5em;
+  line-height: 25px;
+}
+
+.user_avatar {
+  width: 25px;
+  height: 25px;
+  background: red;
+  border-radius: 100%;
+}
+
+.user_name {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.user_status {
+  color: #6882A1;
+  font-size: 11px;
+  text-align: right;
+}
+
+.comment_text {
+  font-size: 15px;
+  line-height: 1.2;
+  margin: .5em 0;
+}
+
+.topic_of_discussion {
+  display: -webkit-box;
+  color: #898989;
+  font-size: 13px;
+}
+
+.user_name,
+.topic_of_discussion {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+
+/* ==============
+  media queries
+============== */
+@media screen and (max-width: 992px) {
+  aside {
+    grid-column: 1/13;
+  }
+}
+
+@media screen and (min-width: 569px) and (max-width: 992px) {
+  aside {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-gap: 2em;
+  }
+
+  .sidebar_item {
+    margin-top: 0;
+  }
+
+  .comments.sidebar_item {
+    grid-column: 1/3;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  ul.top__anime_list {
+    width: 230px;
+    margin: auto;
+  }
+}

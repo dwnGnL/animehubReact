@@ -124,6 +124,10 @@ li.top__anime_item-0 .list__number {
   width: 0;
   height: 100%;
   background: #C4C4C4;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
 }
 

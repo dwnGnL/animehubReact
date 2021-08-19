@@ -72,6 +72,10 @@ footer {
 .social_link {
   width: 30px;
   height: 30px;
+  -webkit-transition: fill .2s;
+  -moz-transition: fill .2s;
+  -ms-transition: fill .2s;
+  -o-transition: fill .2s;
   transition: fill .2s;
   fill: #8FA3BA;
 }

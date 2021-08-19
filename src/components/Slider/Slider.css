@@ -12,6 +12,10 @@
 
 .slider.sliding .slider__background,
 .slider.sliding .slider__container {
+  -webkit-transition: all .2s !important;
+  -moz-transition: all .2s !important;
+  -ms-transition: all .2s !important;
+  -o-transition: all .2s !important;
   transition: all .2s !important;
 }
 
@@ -30,10 +34,18 @@
 }
 
 .slider__background.animated {
+  -webkit-transition: all .7s;
+  -moz-transition: all .7s;
+  -ms-transition: all .7s;
+  -o-transition: all .7s;
   transition: all .7s;
 }
 
 .sliding .slider__background {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
   transition: none !important;
 }
 
@@ -69,12 +81,28 @@
   slider directions
 ============== */
 .slider__container.left-direction {
+  -webkit-transform: translateX(100%) !important;
+  -moz-transform: translateX(100%) !important;
+  -ms-transform: translateX(100%) !important;
+  -o-transform: translateX(100%) !important;
   transform: translateX(100%) !important;
+  -webkit-transition: transform .7s;
+  -moz-transition: transform .7s;
+  -ms-transition: transform .7s;
+  -o-transition: transform .7s;
   transition: transform .7s;
 }
 
 .slider__container.right-direction {
+  -webkit-transform: translateX(-100%) !important;
+  -moz-transform: translateX(-100%) !important;
+  -ms-transform: translateX(-100%) !important;
+  -o-transform: translateX(-100%) !important;
   transform: translateX(-100%) !important;
+  -webkit-transition: transform .7s;
+  -moz-transition: transform .7s;
+  -ms-transition: transform .7s;
+  -o-transition: transform .7s;
   transition: transform .7s;
 }
 
@@ -92,7 +120,15 @@
   border-radius: .2em;
   box-shadow: 0 0 .2em #000;
   cursor: pointer;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
   transform: translateY(-50%);
+  -webkit-transition: all .15s;
+  -moz-transition: all .15s;
+  -ms-transition: all .15s;
+  -o-transition: all .15s;
   transition: all .15s;
   z-index: 9;
   fill: #6882A1;
@@ -102,6 +138,10 @@
 
 .slider__button.to-left {
   left: 10px;
+  -webkit-transform: rotate(180deg) translateY(50%);
+  -moz-transform: rotate(180deg) translateY(50%);
+  -ms-transform: rotate(180deg) translateY(50%);
+  -o-transform: rotate(180deg) translateY(50%);
   transform: rotate(180deg) translateY(50%);
 }
 

@@ -8,6 +8,10 @@ input {
   border: none;
   border-bottom: 1px solid #6882A1;
   box-sizing: border-box;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
   transition: all .3s;
   background: transparent;
   color: inherit;
@@ -24,11 +28,23 @@ div.placeholder {
   color: inherit;
   position: absolute;
   top: 0;
+  -webkit-transform-origin: left;
+  -moz-transform-origin: left;
+  -ms-transform-origin: left;
+  -o-transform-origin: left;
   transform-origin: left;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
   transition: all .3s;
 }
 
 .focused div.placeholder {
+  -webkit-transform: translateY(-65%) scale(.75);
+  -moz-transform: translateY(-65%) scale(.75);
+  -ms-transform: translateY(-65%) scale(.75);
+  -o-transform: translateY(-65%) scale(.75);
   transform: translateY(-65%) scale(.75);
   color: #D81C27;
 }

@@ -1,11 +1,19 @@
 /* scrollbar */
-::-webkit-scrollbar {
-	width: 8px;
-}
+@media only screen and (min-width : 993px) {
+	::-webkit-scrollbar {
+		width: 8px;
+	}
 
-::-webkit-scrollbar-thumb {
-	background-color: #6882A1;
-	outline: none;
+	::-webkit-scrollbar-thumb {
+		background-color: #6882A1;
+		outline: none;
+	}
+
+	/* scrollbar mozild */
+	* {
+		scrollbar-color: #6882a1 transparent;
+		scrollbar-width: thin;
+	}
 }
 
 body {
@@ -16,10 +24,6 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-
-	/* scrollbar mozild */
-	scrollbar-color: #6882a1 transparent;
-	scrollbar-width: thin;
 }
 
 .wrapper {

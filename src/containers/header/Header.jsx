@@ -28,11 +28,23 @@ function Header(props) {
   }, [wrapper]);
 
   function menuHandler(isOpened) {
-    isOpened ? setMenuOpened(' menu-opened') : setMenuOpened(' menu-closed');
+    if (isOpened) {
+      setMenuOpened(' menu-opened');
+      if (props.device !== 'desktop') document.body.style.overflow = 'hidden';
+    } else {
+      setMenuOpened(' menu-closed');
+      if (props.device !== 'desktop') document.body.style.overflow = 'visible';
+    }
   }
 
   function subMenuHandler(isOpened) {
-    isOpened  ? setSubMenuOpened(' sub-menu-opened') : setSubMenuOpened(' sub-menu-closed');
+    if (isOpened) {
+      setSubMenuOpened(' sub-menu-opened');
+      if (props.device === 'desktop') document.body.style.overflow = 'hidden';
+    } else {
+      setSubMenuOpened(' sub-menu-closed');
+      if (props.device === 'desktop') document.body.style.overflow = 'visible';
+    }
   }
 
   return (

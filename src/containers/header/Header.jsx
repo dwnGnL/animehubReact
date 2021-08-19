@@ -88,7 +88,7 @@ function Menu(props) {
   return (
     <div className={'menu-wrapper' + props.activeMenuClass + props.activeSubMenuClass} onClick={closeAll}>
       <nav className='menu' onClick={(event) => event.stopPropagation()}>
-        <div className={'menu-item'} onMouseEnter={() => subMenuHandler(true)} onMouseLeave={() => props.device === 'desktop' ? subMenuHandler(false) : null}>
+        <div className={'menu-item'} onClick={() => subMenuHandler(true)} onMouseEnter={() => subMenuHandler(true)} onMouseLeave={() => props.device === 'desktop' ? subMenuHandler(false) : null}>
           <div className="main-item">Аниме</div>
           {props.device === 'desktop' ? <SubMenu device={props.device} /> : null}
         </div>

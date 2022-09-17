@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { SLiderArrow } from '../common/Icons';
 import Loader from "../common/loader/Loader";
-import "./slider.css";
+import "./Slider.css";
 
 const delay = {
   animationDelay: 700,
-  autorotateDelay: 5000
+  autorotateDelay: 5000,
 };
 
 const LoaderStyles = {
@@ -51,17 +51,17 @@ function SliderInner({ allImages }) {
   const [moveSize, setMoveSize] = useState(0);
   const [transformBackground, setTransformBackground] = useState(0);
   const [currentBgPosition, setCurrentBgPosition] = useState(0);
-  const [coordinates, setCoordinat] = useState({
+  const [coordinates, setCoordinate] = useState({
     start: 0,
     end: 0
   });
 
-  const showCurrentSlide = useCallback((choosedDirection) => {
+  const showCurrentSlide = useCallback((chosenDirection) => {
     let currentSlide = allImages.indexOf(images[1]);
     let prevSlide, nextSlide;
 
-    if (choosedDirection === "right-direction") currentSlide >= allImages.length - 1 ? (currentSlide = 0) : (currentSlide += 1);
-    if (choosedDirection === "left-direction") currentSlide <= 0 ? (currentSlide = allImages.length - 1) : (currentSlide -= 1);
+    if (chosenDirection === "right-direction") currentSlide >= allImages.length - 1 ? (currentSlide = 0) : (currentSlide += 1);
+    if (chosenDirection === "left-direction") currentSlide <= 0 ? (currentSlide = allImages.length - 1) : (currentSlide -= 1);
 
     currentSlide <= 0 ? (prevSlide = allImages.length - 1) : (prevSlide = currentSlide - 1);
     currentSlide >= allImages.length - 1 ? (nextSlide = 0) : (nextSlide = currentSlide + 1);
@@ -69,11 +69,11 @@ function SliderInner({ allImages }) {
     setImages([allImages[prevSlide], allImages[currentSlide], allImages[nextSlide]]);
   }, [allImages, images]);
 
-  const moveBackgroundSlider = useCallback((choosedDirection) => {
+  const moveBackgroundSlider = useCallback((chosenDirection) => {
     const width = slider.current.offsetWidth;
     let movingPart = backgroundPosition;
     
-    choosedDirection === "right-direction" ? movingPart++ : movingPart--;
+    chosenDirection === "right-direction" ? movingPart++ : movingPart--;
 
     if (movingPart >= 3 || movingPart <= -3) {
       setTimeout(() => {
@@ -108,11 +108,11 @@ function SliderInner({ allImages }) {
     
     if (e.type === 'touchstart') {
       setAllowSliding(false);
-      setCoordinat({ start: newCoordinates, end: coordinates.end });
+      setCoordinate({ start: newCoordinates, end: coordinates.end });
     };
 
     if (e.type === 'touchmove') {
-      setCoordinat({
+      setCoordinate({
         start: coordinates.start,
         end: newCoordinates
       });
@@ -133,7 +133,7 @@ function SliderInner({ allImages }) {
         setTimeout(() => setSliderClass(''), 200);
       }
 
-      setCoordinat({ start: 0, end: 0 });
+      setCoordinate({ start: 0, end: 0 });
       setMoveSize(0);
     }
   }

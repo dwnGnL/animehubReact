@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { SLiderArrow } from '../common/Icons';
-import Loader from "../common/loader/Loader";
-import "./Slider.css";
+import Loader from '../common/loader/Loader';
+import './Slider.css';
 
 const delay = {
   animationDelay: 700,
@@ -18,14 +18,10 @@ const LoaderStyles = {
 
 
 function Slider() {
-  const sliderWrapper = useRef();
-  const [sliderWrapperHeight, setSliderWrapperHeight] = useState();
   const [sliderImages, setSliderImages] = useState([]);
 
   useEffect(() => {
-    setSliderWrapperHeight(sliderWrapper.current.offsetWidth/ 2.4);
-
-    fetch("https://swapi.dev/api/people/1")
+    fetch('https://swapi.dev/api/people/1')
       .then((response) => response.json())
       .then((request) => {
         setSliderImages(request.films);
@@ -33,134 +29,135 @@ function Slider() {
   }, []);
 
   return (
-    <div className="slider_wrapper"  ref={sliderWrapper} style={{height: `${sliderWrapperHeight}px`}}>
-      {sliderImages.length !== 0 ? <SliderInner allImages={sliderImages} /> : <Loader width={50} height={50} styles={LoaderStyles} />}
+    <div className="slider_wrapper">
+      {sliderImages.length !== 0 ? <SliderInner allImages={sliderImages} /> : <Loader styles={LoaderStyles} />}
     </div>
   );
 }
 
 function SliderInner({ allImages }) {
+  // common
   const slider = useRef();
-  const bgPositionRef = useRef(0);
   const [direction, setDirection] = useState('');
-  const [images, setImages] = useState([allImages[allImages.length - 1], allImages[0], allImages[1]]);
-  const [backgroundPosition, setBackgroundPosition] = useState(0);
-  const [backgroundClass, setBackgroundClass] = useState('');
-  const [allowSliding, setAllowSliding] = useState(true);
+  const imagesRef = useRef([allImages[allImages.length - 1], allImages[0], allImages[1]]);
+  const isAllowSlidingRef = useRef(true);
+  const slContainer = useRef();
+  const movementSizeOnSwipeRef = useRef(0);
+  const timer = useRef();
+
+  // bg
+  const background = useRef();
+  const bgClassRef = useRef('');
+  const bgPositionPart = useRef('bg_part-0');
+  const backgroundTransform = useRef(0);
+  const backgroundMovementPartRef = useRef(0);
+  
+  // mobile only
   const [sliderClass, setSliderClass] = useState('');
-  const [moveSize, setMoveSize] = useState(0);
-  const [transformBackground, setTransformBackground] = useState(0);
-  const [currentBgPosition, setCurrentBgPosition] = useState(0);
-  const [coordinates, setCoordinate] = useState({
-    start: 0,
-    end: 0
-  });
+  const coordinatesRef = useRef({ start: 0, end: 0 })
 
   const showCurrentSlide = useCallback((chosenDirection) => {
-    let currentSlide = allImages.indexOf(images[1]);
+    let currentSlide = allImages.indexOf(imagesRef.current[1]);
     let prevSlide, nextSlide;
 
-    if (chosenDirection === "right-direction") currentSlide >= allImages.length - 1 ? (currentSlide = 0) : (currentSlide += 1);
-    if (chosenDirection === "left-direction") currentSlide <= 0 ? (currentSlide = allImages.length - 1) : (currentSlide -= 1);
+    if (chosenDirection === 'right-direction') currentSlide >= allImages.length - 1 ? currentSlide = 0 : currentSlide += 1;
+    if (chosenDirection === 'left-direction') currentSlide <= 0 ? currentSlide = allImages.length - 1 : currentSlide -= 1;
 
-    currentSlide <= 0 ? (prevSlide = allImages.length - 1) : (prevSlide = currentSlide - 1);
-    currentSlide >= allImages.length - 1 ? (nextSlide = 0) : (nextSlide = currentSlide + 1);
+    currentSlide <= 0 ? prevSlide = allImages.length - 1 : prevSlide = currentSlide - 1;
+    currentSlide >= allImages.length - 1 ? nextSlide = 0 : nextSlide = currentSlide + 1;
 
-    setImages([allImages[prevSlide], allImages[currentSlide], allImages[nextSlide]]);
-  }, [allImages, images]);
+    imagesRef.current = [allImages[prevSlide], allImages[currentSlide], allImages[nextSlide]];
+  }, [allImages]);
 
   const moveBackgroundSlider = useCallback((chosenDirection) => {
-    const width = slider.current.offsetWidth;
-    let movingPart = backgroundPosition;
-    
-    chosenDirection === "right-direction" ? movingPart++ : movingPart--;
+    if (chosenDirection === 'right-direction') backgroundMovementPartRef.current++;
+    if (chosenDirection === 'left-direction') backgroundMovementPartRef.current--;
 
-    if (movingPart >= 3 || movingPart <= -3) {
+    if (backgroundMovementPartRef.current >= 3 || backgroundMovementPartRef.current <= -3) {
       setTimeout(() => {
-        movingPart = 0;
-        setBackgroundPosition(0);
-        setTransformBackground(0)
+        bgClassRef.current = 'disabledAnim';
+        backgroundMovementPartRef.current = 0;
+        bgPositionPart.current = `bg_part-${0}`;
       }, delay.animationDelay);
     }
-
-    setBackgroundClass('animated');
-    setBackgroundPosition(movingPart);
-    setTransformBackground(((width / 100) * (11.1 * movingPart)) * -3);
-    setTimeout(() => setBackgroundClass(''), delay.animationDelay);
-  }, [backgroundPosition]);
+    
+    bgPositionPart.current = `bg_part-${backgroundMovementPartRef.current}`;
+    bgClassRef.current = '';
+  }, []);
 
   const moveSlide = useCallback((direction, obligatoryAllow = false) => {
-    if (!allowSliding && !obligatoryAllow) return;
-    setAllowSliding(false);
+    if (!isAllowSlidingRef.current && !obligatoryAllow) return;
+    clearTimeout(timer.current);
 
-    setDirection(direction);
+    isAllowSlidingRef.current = false;
+    
     moveBackgroundSlider(direction);
+    setDirection(direction);
 
     setTimeout(() => {
-      setAllowSliding(true);
       showCurrentSlide(direction);
-      setDirection("");
+      setDirection('');
+      isAllowSlidingRef.current = true;
+      timer.current = setTimeout(() => moveSlide('right-direction'), delay.autorotateDelay);
     }, delay.animationDelay);
-  }, [allowSliding, moveBackgroundSlider, showCurrentSlide]);
+  }, [moveBackgroundSlider, showCurrentSlide]);
 
-  function touchSliding(e) {
+
+  const touchSliding = useCallback((e) => {
     let newCoordinates = e.changedTouches[0].clientX;
     
     if (e.type === 'touchstart') {
-      setAllowSliding(false);
-      setCoordinate({ start: newCoordinates, end: coordinates.end });
+      isAllowSlidingRef.current = false;
+      coordinatesRef.current.start = newCoordinates;
     };
 
     if (e.type === 'touchmove') {
-      setCoordinate({
-        start: coordinates.start,
-        end: newCoordinates
-      });
+      coordinatesRef.current.end = newCoordinates;
+      
+      if (coordinatesRef.current.end === 0) return;
 
-      if (coordinates.end === 0) return;
-      setMoveSize(coordinates.end - coordinates.start);
-      setTransformBackground(((coordinates.end - coordinates.start) / 3) + currentBgPosition);
+      movementSizeOnSwipeRef.current = coordinatesRef.current.end - coordinatesRef.current.start;
+      backgroundTransform.current = ((coordinatesRef.current.end - coordinatesRef.current.start) / 3);
+      background.current.style.transform = `translateX(calc(${-backgroundMovementPartRef.current * 11.1}% + ${backgroundTransform.current}px))`;
+      slContainer.current.style.transform = `translateX(${movementSizeOnSwipeRef.current}px)`;
+
+      setSliderClass('sliding');
     }
 
     if (e.type === 'touchend') {
-      setAllowSliding(true);
-      if (moveSize <= -slider.current.offsetWidth / 4) moveSlide("right-direction", true);
-      if (moveSize >= slider.current.offsetWidth / 4) moveSlide("left-direction", true);
+      isAllowSlidingRef.current = true;
+      if (movementSizeOnSwipeRef.current <= -slider.current.offsetWidth / 4) moveSlide('right-direction', true);
+      if (movementSizeOnSwipeRef.current >= slider.current.offsetWidth / 4) moveSlide('left-direction', true);
       
-      if (moveSize >= -slider.current.offsetWidth / 4 && moveSize <= slider.current.offsetWidth / 4) {
-        setTransformBackground(currentBgPosition);
-        setSliderClass('sliding');
-        setTimeout(() => setSliderClass(''), 200);
-      }
-
-      setCoordinate({ start: 0, end: 0 });
-      setMoveSize(0);
+      coordinatesRef.current.start = 0;
+      coordinatesRef.current.end = 0;
+      
+      setSliderClass('');
+      movementSizeOnSwipeRef.current = 0;
+      slContainer.current.style.transform = `translateX(0)`;
     }
-  }
-
-  useEffect(() => {
-    setCurrentBgPosition(bgPositionRef.current);
-    const interval = setInterval(() => moveSlide("right-direction"), delay.autorotateDelay);
-    return () => clearInterval(interval);
   }, [moveSlide]);
 
-  useEffect(() => {bgPositionRef.current = transformBackground}, [transformBackground]);
+  useEffect(() => {
+    timer.current = setTimeout(() => moveSlide('right-direction'), delay.autorotateDelay);
+  }, [moveSlide]);
+
 
   return (
     <div className={`slider ${sliderClass}`} ref={slider}>
-      <div className="slider__button to-left" onClick={() => moveSlide("left-direction")}>
+      <div className="slider__button to-left" onClick={() => moveSlide('left-direction')}>
         <SLiderArrow />
       </div>
-      <div className="slider__button to-right" onClick={() => moveSlide("right-direction")}>
+      <div className="slider__button to-right" onClick={() => moveSlide('right-direction')}>
         <SLiderArrow />
       </div>
 
-      <div className={`slider__background ${direction} ${backgroundClass}`} style={{transform: `translateX(${transformBackground}px)`}}></div>
+      <div ref={background} className={`slider__background ${direction} ${bgClassRef.current} ${bgPositionPart.current}`}></div>
 
-      <div className={`slider__container ${direction}`} onTouchStart={touchSliding} onTouchMove={touchSliding} onTouchEnd={touchSliding} style={{transform: `translateX(${moveSize}px)`}}>
-        <div className="slider__item slider__item-0">{images[0]}</div>
-        <div className="slider__item slider__item-1">{images[1]}</div>
-        <div className="slider__item slider__item-2">{images[2]}</div>
+      <div ref={slContainer} className={`slider__container ${direction}`} onTouchStart={touchSliding} onTouchMove={touchSliding} onTouchEnd={touchSliding}>
+        <div className="slider__item slider__item-0">{imagesRef.current[0]}</div>
+        <div className="slider__item slider__item-1">{imagesRef.current[1]}</div>
+        <div className="slider__item slider__item-2">{imagesRef.current[2]}</div>
       </div>
     </div>
   );
